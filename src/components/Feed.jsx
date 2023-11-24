@@ -1,8 +1,20 @@
 import { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import Sidebar from "./Sidebar";
+import Videos from "./Videos";
+import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const Feed = () => {
+  const [selectedCategory, setSelectedCategory] = useState("New");
+  const [videos, setvideos] = useState([]);
+  useEffect(() => {
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) => {
+      setvideos(data.items);
+    })
+    .catch((e)=>{
+      console.log(e)
+    });
+  }, [selectedCategory]);
   return (
     <Stack
       sx={{
@@ -25,7 +37,10 @@ const Feed = () => {
           },
         }}
       >
-        <Sidebar/>
+        <Sidebar
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         <Typography
           className="copyright"
           variant="body2"
@@ -33,6 +48,17 @@ const Feed = () => {
         >
           Copyright 2023 vmo abcd
         </Typography>
+      </Box>
+      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+        <Typography
+          variant="h4"
+          fontWeight={"bold"}
+          mb={2}
+          sx={{ color: "white" }}
+        >
+          {selectedCategory} <span style={{ color: "red" }}>Videos</span>
+        </Typography>
+        <Videos videos={videos} />
       </Box>
     </Stack>
   );
