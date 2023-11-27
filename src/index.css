@@ -67,6 +67,10 @@ input{
   outline: none;
 }
 
+a{
+  color: white;
+}
+
 @media screen and (max-width: 900px) {
   .category-btn{
     margin: 10px;

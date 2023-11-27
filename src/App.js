@@ -6,6 +6,7 @@ import {
   ChannelDetail,
   SearchFeed,
   Navbar,
+  Footer,
 } from "./components";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/channel/:id" element={<ChannelDetail />} />
           <Route path="/search/:searchTerm" element={<SearchFeed />} />
         </Routes>
+        <Footer/>
       </Box>
     </BrowserRouter>
   );

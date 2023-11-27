@@ -5,6 +5,7 @@ const Sidebar = ({selectedCategory,setSelectedCategory}) => {
   return (
     <Stack
       direction={"row"}
+      // position={'absolute'}
       sx={{
         overflowY: "auto",
         height: {
