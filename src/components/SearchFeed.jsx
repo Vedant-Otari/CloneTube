@@ -16,9 +16,6 @@ const SearchFeed = () => {
       })
       .catch((e) => {});
     }
-    else{
-      alert("nooooooooooooooooooo there is no search term")
-    }
   }, [searchTerm]);
 
   return (
