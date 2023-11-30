@@ -1,12 +1,21 @@
 import { Stack } from "@mui/material";
 import { categories } from "../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Sidebar = ({selectedCategory,setSelectedCategory,sidebarchange}) => {
+  
+  const navi = useNavigate();
+  useEffect(() => {
+    navi(`/`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]);
+  
   return (
     <Stack
       direction={"row"}
       sx={{
-        transition: 'width 5s ease-in-out',
+        transition: '600ms',
         borderRight: "1px solid #3d3d3d",
         padding:sidebarchange ? '10px 20px 0px 20px' : '0',
         overflowY: "auto",
@@ -14,7 +23,7 @@ const Sidebar = ({selectedCategory,setSelectedCategory,sidebarchange}) => {
           sx: "auto",
           md: "95%",
         },
-        width: sidebarchange?'auto':'0px',
+        width: sidebarchange?'140px':'0px',
         flexDirection: { md: "column" },
       }}
     >

@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const Navbar = ({sidebarchange, setsidebarchange}) => {
+
   return (
     <Stack
       direction={"row"}

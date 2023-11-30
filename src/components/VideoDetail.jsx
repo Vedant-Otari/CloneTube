@@ -28,7 +28,7 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = VideoDetail;
   return (
-    <Box minHeight={"95vh"}>
+    <Box p={2} sx={{ overflowY: "auto", height: "90vh"}}>
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
           <Box

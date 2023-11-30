@@ -16,6 +16,9 @@ const SearchFeed = () => {
       })
       .catch((e) => {});
     }
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    document.title = (searchTerm==='New'?'':(searchTerm+' | ')) + "CloneTube";
   }, [searchTerm]);
 
   return (
@@ -26,8 +29,7 @@ const SearchFeed = () => {
         mb={2}
         sx={{ color: "white" }}
       >
-        Search results for: <span style={{ color: "red" }}>{searchTerm}</span>{" "}
-        videos
+        {searchTerm==='New'?'':'Search results for: '} <span style={{ color: "red" }}>{searchTerm}</span>{" "}videos
       </Typography>
       <Videos videos={videos} />
     </Box>

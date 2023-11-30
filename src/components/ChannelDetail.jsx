@@ -19,9 +19,12 @@ const ChannelDetail = () => {
         setVideos(data?.items);
       }
     );
-  }, [id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    document.title = (ChannelDetail?.snippet?.title? ChannelDetail?.snippet?.title + " | ":"") + "CloneTube";
+ 
+  }, [id,ChannelDetail]);
   return (
-    <Box minHeight={"95vh"}>
+    <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
       <Box>
         <div
           style={{
@@ -33,12 +36,7 @@ const ChannelDetail = () => {
         />
         <ChannelCard channelDetail={ChannelDetail} marginTop="-130px" />
       </Box>
-      <Box display={"flex"} p="2">
-        <Box
-          sx={{
-            mr: { sm: "100px" },
-          }}
-        />
+      <Box display={"flex"} justifyContent={"center"}>
         <Videos videos={videos} />
       </Box>
     </Box>

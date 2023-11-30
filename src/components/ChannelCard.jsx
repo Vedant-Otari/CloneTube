@@ -37,6 +37,7 @@ const ChannelCard = ({ channelDetail,marginTop }) => {
             }
             alt={channelDetail?.snippet?.title}
             sx={{
+              // background:'gray',
               borderRadius: "50%",
               height: "180px",
               width: "180px",
