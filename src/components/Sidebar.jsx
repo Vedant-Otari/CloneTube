@@ -23,7 +23,7 @@ const Sidebar = ({selectedCategory,setSelectedCategory,sidebarchange}) => {
           sx: "auto",
           md: "95%",
         },
-        width: sidebarchange?'140px':'0px',
+        width: sidebarchange?{xs:'100%',md:'140px'}:'0px',
         flexDirection: { md: "column" },
       }}
     >

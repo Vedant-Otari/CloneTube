@@ -28,14 +28,14 @@ const VideoDetail = () => {
     statistics: { viewCount, likeCount },
   } = VideoDetail;
   return (
-    <Box p={2} sx={{ overflowY: "auto", height: "90vh"}}>
+    <Box p={2} sx={{ overflowY: "auto", height: "90vh",width:'100%'}}>
       <Stack direction={{ xs: "column", md: "row" }}>
         <Box flex={1}>
           <Box
             sx={{
               width: "100%",
               position: "sticky",
-              top: "86px",
+              top: "0px",
             }}
           >
             <ReactPlayer
