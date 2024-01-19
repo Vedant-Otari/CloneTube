@@ -2,9 +2,15 @@ import { Stack } from "@mui/material";
 import { categories } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedCategory,setvideos } from "../redux/reducer";
+import { useSelector } from "react-redux";
 
-const Sidebar = ({selectedCategory,setSelectedCategory,sidebarchange}) => {
+const Sidebar = () => {
+  const selectedCategory = useSelector((state) => state.selectedCategory);
+  const sidebarchange = useSelector((state) => state.sidebarchange);
   
+  const dispatch = useDispatch();
   const navi = useNavigate();
   useEffect(() => {
     navi(`/`);
@@ -30,7 +36,7 @@ const Sidebar = ({selectedCategory,setSelectedCategory,sidebarchange}) => {
       { categories.map((category) => (
         <button
           className="category-btn"
-          onClick={()=>setSelectedCategory(category.name)}
+          onClick={()=>{dispatch(setSelectedCategory(category.name));dispatch(setvideos([]))}}
           style={{
             background: category.name === selectedCategory && "#FC1503",
             color: "white",

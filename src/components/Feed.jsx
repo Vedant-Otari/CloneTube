@@ -1,19 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import Videos from "./Videos";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { setvideos } from "../redux/reducer";
 
-const Feed = ({ selectedCategory }) => {
-  const [videos, setvideos] = useState([]);
+const Feed = () => {
+  const selectedCategory = useSelector((state) => state.selectedCategory);
+  const videos = useSelector((state) => state.videos);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
       .then((data) => {
-        setvideos(data.items);
+        dispatch(setvideos(data.items));
       })
       .catch((e) => {
         console.log(e);
       });
-  }, [selectedCategory]);
+  }, [selectedCategory, dispatch]);
 
   return (
     <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
@@ -25,7 +30,7 @@ const Feed = ({ selectedCategory }) => {
       >
         {selectedCategory} <span style={{ color: "red" }}>Videos</span>
       </Typography>
-      {videos ? <Videos videos={videos} />:'dadfad'}
+      {videos ? <Videos videos={videos} /> : "dadfad"}
     </Box>
   );
 };

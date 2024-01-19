@@ -22,7 +22,7 @@ const VideoDetail = () => {
     );
   }, [id]);
 
-  if (!VideoDetail?.snippet) return "Loading dafdf...";
+  if (!VideoDetail?.snippet) return "Loading...";
   const {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },

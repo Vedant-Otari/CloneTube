@@ -1,25 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import Videos from "./Videos";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setvideos } from "../redux/reducer";
 
 const SearchFeed = () => {
-  const [videos, setvideos] = useState([]);
   const { searchTerm } = useParams();
+  const videos = useSelector(state=>state.videos)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (searchTerm) {
       fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
       .then((data) => {
-        setvideos(data.items);
+        dispatch(setvideos(data.items));
       })
       .catch((e) => {});
     }
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
     document.title = (searchTerm==='New'?'':(searchTerm+' | ')) + "CloneTube";
-  }, [searchTerm]);
+  }, [searchTerm,dispatch]);
 
   return (
     <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>

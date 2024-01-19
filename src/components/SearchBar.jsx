@@ -1,16 +1,18 @@
 import { Paper, IconButton } from "@mui/material";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "@mui/icons-material";
+import { useSelector,useDispatch } from "react-redux";
+import { setSearchTerm } from "../redux/reducer";
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchTerm = useSelector(state=>state.searchTerm)
+  const dispatch = useDispatch()
   const navi = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm) {
       navi(`/search/${searchTerm}`);
-      setSearchTerm("");
+      dispatch(setSearchTerm(""));
     }
   };
   return (
@@ -32,7 +34,7 @@ const SearchBar = () => {
           className="search-bar"
           placeholder="Search here..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => dispatch(setSearchTerm(e.target.value))}
         />
         <IconButton type="submit">
           <Search />

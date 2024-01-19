@@ -1,28 +1,31 @@
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import ChannelCard from "./ChannelCard";
 import Videos from "./Videos";
+import { useSelector,useDispatch } from "react-redux";
+import { setChannelDetail,setvideos } from "../redux/reducer";
 
 const ChannelDetail = () => {
-  const [ChannelDetail, setChannelDetail] = useState(null);
-  const [videos, setVideos] = useState([]);
+  const ChannelDetail = useSelector(state=>state.ChannelDetail)
+  const videos = useSelector(state=>state.videos)
+  const dispatch = useDispatch()
   const { id } = useParams();
   useEffect(() => {
     fetchFromAPI(`channels?part="snippet&id=${id}`).then((data) => {
-      setChannelDetail(data?.items[0]);
+      dispatch(setChannelDetail(data?.items[0]));
     });
 
     fetchFromAPI(`search?channelId=${id}&part=snippet&order=date`).then(
       (data) => {
-        setVideos(data?.items);
+        dispatch(setvideos(data?.items));
       }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
     document.title = (ChannelDetail?.snippet?.title? ChannelDetail?.snippet?.title + " | ":"") + "CloneTube";
  
-  }, [id,ChannelDetail]);
+  }, [id,ChannelDetail,dispatch]);
   return (
     <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
       <Box>

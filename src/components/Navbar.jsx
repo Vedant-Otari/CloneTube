@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import logo from "../utils/images/logo512.png";
 import SearchBar from "./SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useDispatch, useSelector } from "react-redux";
+import { setsidebarchange } from "../redux/reducer";
 
-const Navbar = ({ sidebarchange, setsidebarchange }) => {
+const Navbar = () => {
+  const sidebarchange = useSelector(state=>state.sidebarchange)
+  const dispatch = useDispatch()
   return (
     <Stack
       direction={"row"}
@@ -24,7 +28,7 @@ const Navbar = ({ sidebarchange, setsidebarchange }) => {
         <Box sx={{ display: { xs: "none", md: "block" } }}>
           <button
             onClick={() =>
-              sidebarchange ? setsidebarchange(false) : setsidebarchange(true)
+              sidebarchange ? dispatch(setsidebarchange(false)) : dispatch(setsidebarchange(true))
             }
             className="category-btn"
             style={{ padding: "0px 10px 0px 10px" }}

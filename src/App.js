@@ -8,13 +8,9 @@ import {
   Navbar,
   Footer,
 } from "./components";
-import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 
 const App = () => {
-  const [selectedCategory, setSelectedCategory] = useState("New");
-  const [sidebarchange, setsidebarchange] = useState(true);
-
   return (
     <BrowserRouter>
       <Box
@@ -22,10 +18,7 @@ const App = () => {
         minHeight={"100vh"}
         height={"fitContent"}
       >
-        <Navbar
-          sidebarchange={sidebarchange}
-          setsidebarchange={setsidebarchange}
-        />
+        <Navbar/>
         <Box minHeight={"95vh"}>
           <Stack
             sx={{
@@ -36,16 +29,12 @@ const App = () => {
               height: "95vh",
             }}
           >
-            <Sidebar
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              sidebarchange={sidebarchange}
-            />
+            <Sidebar/>
             <Routes>
               <Route
                 path="/"
                 exact
-                element={<Feed selectedCategory={selectedCategory} />}
+                element={<Feed/>}
               />
               <Route path="/video/:id" element={<VideoDetail />} />
               <Route path="/channel/:id" element={<ChannelDetail />} />
